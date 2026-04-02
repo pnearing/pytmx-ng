@@ -148,7 +148,11 @@ class TiledTileset(TiledElement):
     def _parse_all_tiles(self, node: ElementTree.Element, is_external: bool) -> None:
         """Parses all individual tiles within the tileset node."""
         for child in node.iter("tile"):
-            tiled_gid = int(child.get("id"))
+            raw_id = child.get("id")
+            if raw_id is None:
+                raise TypeError("Tile is missing required 'id' attribute")
+
+            tiled_gid = int(raw_id)
             props = self._parse_tile_properties(child)
             logger.debug(f"Parsing tile ID: {tiled_gid}")
 

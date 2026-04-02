@@ -32,10 +32,12 @@ from base64 import b64decode
 from collections.abc import Callable, Sequence
 from logging import getLogger
 from math import cos, radians, sin
+from types import ModuleType
 from typing import Any
 
 logger = getLogger(__name__)
 
+zstd_module: ModuleType | None
 try:
     import zstd as zstd_module
 except ImportError:

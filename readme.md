@@ -156,15 +156,27 @@ Installation
 
 Install from pip
 
-    pip install pytmx-ng
+```
+pip install pytmx-ng
+```
 
+Install from source
 
-Manually install it
+```
+git clone https://github.com/pnearing/pytmx-ng.git
+cd pytmx-ng
+pip install .
+```
 
-    python setup.py install
+Install in editable/development mode
 
+```
+pip install -e .
+```
 
-You can also copy/paste the pytmx folder into your project
+pytmx-ng uses a modern `pyproject.toml` build system (PEP 621) with `setuptools-scm` for versioning.
+
+You can also copy/paste the pytmx folder into your project.
 
 
 Basic use:

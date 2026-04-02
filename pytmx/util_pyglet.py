@@ -20,7 +20,9 @@ License along with pytmx.  If not, see <http://www.gnu.org/licenses/>.
 import logging
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, cast
+
+from pyglet.image import AbstractImage
 
 logger = logging.getLogger(__name__)
 
@@ -63,6 +65,8 @@ def pyglet_image_loader(
         flags: TileFlags | None = None,
     ) -> Any:
         try:
+            tile: AbstractImage
+
             if rect:
                 x, y, w, h = rect
                 y = image.height - y - h
@@ -71,7 +75,8 @@ def pyglet_image_loader(
                 tile = image
 
             angle, flip_x, flip_y = handle_flags(flags)
-            tile = tile.get_transform(flip_x=flip_x, flip_y=flip_y, rotate=int(angle))
+            rot = cast(Literal[0, 90, 180, 270, 360], int(angle))
+            tile = tile.get_transform(flip_x=flip_x, flip_y=flip_y, rotate=rot)
 
             return tile
 
